@@ -19,7 +19,6 @@ def CheckFileExists(file):
     return file
 
 
-
 def CheckHelp(parameters):
     if 'help' in parameters:
         argument_parser.print_help()
