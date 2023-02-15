@@ -2,7 +2,7 @@
 A classic project
 
 ```bash
-Local Directory: /terimnal-apps/videoplayuer
+Local Directory: /terminal-apps/videoplayer
 IN: python videoplayer.py -f Color_Test.mp4 -c
 ```
 Showcase
