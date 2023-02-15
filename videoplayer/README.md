@@ -6,7 +6,7 @@ Local Directory: /terimnal-apps/videoplayuer
 IN: python videoplayer.py -f Color_Test.mp4 -c
 ```
 Showcase
-![](md-display.mp4)
+![](md-display.gif)
 
 Parameters
 ```
