@@ -2,6 +2,7 @@ import argparse
 import os
 import cv2
 import numpy
+import atexit
 
 argument_parser = argparse.ArgumentParser(description="Terminal Video Player",
                                           formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -61,6 +62,8 @@ def PlayVideoFrames(file):
     cv2.destroyAllWindows()
 
 
+atexit.register(lambda: print("\033[0m"))
+
 parameters = argument_parser.parse_args()
 CheckHelp(parameters)
 
@@ -71,3 +74,5 @@ if 'color' in parameters:
 
 file = CheckFileExists(parameters.file)
 PlayVideoFrames(file)
+
+print("\033[0m")
