@@ -3,7 +3,7 @@ import os
 import cv2
 import numpy
 import atexit
-
+import time
 
 argument_parser = argparse.ArgumentParser(description="Terminal Video Player",
                                           formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -65,6 +65,7 @@ def PlayVideoFrames(file):
             frame = MapFrameToTerminal(frame)
             frame = MapIntensity(frame)
             print("".join(frame))
+            time.sleep(1 / OriginalFramerate(file))
             if cv2.waitKey(1) & 0xFF == ord("q"):
                 break
         else:
