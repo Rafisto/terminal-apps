@@ -75,4 +75,3 @@ if 'color' in parameters:
 file = CheckFileExists(parameters.file)
 PlayVideoFrames(file)
 
-print("\033[0m")
