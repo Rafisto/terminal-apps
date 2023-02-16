@@ -11,7 +11,7 @@ argument_parser.add_argument("-f", "--file", help="Video file to play")
 argument_parser.add_argument("-c", "--color", help="Color mode", action='store_true')
 argument_parser.add_argument("-p", "--pre", help="Pre-render video", action='store_true')
 argument_parser.add_argument("-s", "--save", help="Save pre-rendered video", action='store_true')
-argument_parser.add_argument("-F", "--fps", help="Framerate of the video", type=int, default=0)
+argument_parser.add_argument("-F", "--fps", help="Framerate of the video (will use the framerate of the original video if not specified)", type=int, default=0)
 argument_parser.usage = "videoplayer.py [-h for help]"
 
 pixel_set = " `.-':_,^=;><+!rc*/z?sLTv)J7(|Fi{C}fI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ%&@"
