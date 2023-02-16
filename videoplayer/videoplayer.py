@@ -4,10 +4,14 @@ import cv2
 import numpy
 import atexit
 
+
 argument_parser = argparse.ArgumentParser(description="Terminal Video Player",
                                           formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 argument_parser.add_argument("-f", "--file", help="Video file to play")
 argument_parser.add_argument("-c", "--color", help="Color mode", action='store_true')
+argument_parser.add_argument("-p", "--pre", help="Pre-render video", action='store_true')
+argument_parser.add_argument("-s", "--save", help="Save pre-rendered video", action='store_true')
+argument_parser.add_argument("-F", "--fps", help="Framerate of the video", type=int)
 argument_parser.usage = "videoplayer.py [-h for help]"
 
 pixel_set = " `.-':_,^=;><+!rc*/z?sLTv)J7(|Fi{C}fI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ%&@"
@@ -44,6 +48,13 @@ def MapIntensity(frame):
     if play_color:
         return ''.join([''.join([PixelToAsciiColor(p) for p in pixel]) for pixel in frame])
     return ''.join([''.join([PixelToAscii(p) for p in pixel]) for pixel in frame])
+
+
+def OriginalFramerate(file):
+    video = cv2.VideoCapture(file)
+    fps = video.get(cv2.CAP_PROP_FPS)
+    video.release()
+    return fps
 
 
 def PlayVideoFrames(file):
