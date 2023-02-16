@@ -65,7 +65,7 @@ def PlayVideoFrames(file):
             frame = MapFrameToTerminal(frame)
             frame = MapIntensity(frame)
             print("".join(frame))
-            time.sleep(1 / OriginalFramerate(file))
+            time.sleep(1 / OriginalFramerate(file) - 0.0134)
             if cv2.waitKey(1) & 0xFF == ord("q"):
                 break
         else:
