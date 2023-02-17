@@ -20,6 +20,13 @@ class ArgumentParser:
     def ValidateArguments(self):
         self.CheckFileExists()
         self.CheckHelp()
+        if os.name == 'nt' and self.parameters.color:
+            print("Color mode probably not supported on Windows, consider switching to better OS")
+        if self.parameters.fps == 0:
+            print("Using source framerate")
+        elif self.parameters.fps < 0:
+            print("-F [--fps] positional argument must be positive")
+            exit()
 
     def CheckFileExists(self):
         if not os.path.isfile(self.argument_parser.parse_args().file):
@@ -30,5 +37,14 @@ class ArgumentParser:
             self.argument_parser.print_help()
             exit()
 
+    def GetColor(self):
+        return self.parameters.color
+
     def GetFile(self):
-        return self.argument_parser.parse_args().file
+        return self.parameters.file
+
+    def GetFPS(self):
+        return self.parameters.fps
+
+    def GetPre(self):
+        return self.parameters.pre
