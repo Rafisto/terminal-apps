@@ -10,6 +10,7 @@ class ArgumentParser:
         self.argument_parser.add_argument("-c", "--color", help="Color mode", action='store_true')
         self.argument_parser.add_argument("-p", "--pre", help="Pre-render video", action='store_true')
         self.argument_parser.add_argument("-s", "--save", help="Save pre-rendered video", action='store_true')
+        self.argument_parser.add_argument("-y", "--youtube", help="Play video from YouTube")
         self.argument_parser.add_argument("-F", "--fps",
                                           help="Framerate of the video (will use the framerate of the original video if not specified)",
                                           type=int, default=0)
@@ -29,8 +30,9 @@ class ArgumentParser:
             exit()
 
     def CheckFileExists(self):
-        if not os.path.isfile(self.argument_parser.parse_args().file):
-            raise argparse.ArgumentTypeError("File not found")
+        if self.argument_parser.parse_args().file is not None:
+            if not os.path.isfile(self.argument_parser.parse_args().file):
+                raise argparse.ArgumentTypeError("File not found")
 
     def CheckHelp(self):
         if 'help' in self.parameters:
@@ -48,3 +50,6 @@ class ArgumentParser:
 
     def GetPre(self):
         return self.parameters.pre
+
+    def GetYoutube(self):
+        return self.parameters.youtube

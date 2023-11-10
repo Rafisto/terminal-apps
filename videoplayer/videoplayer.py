@@ -1,4 +1,5 @@
-
+import os
+import pytube
 import cv2
 import atexit
 import time
@@ -6,17 +7,31 @@ import numpy
 from parameters import ArgumentParser
 from videoprocessor import VideoProcessor
 
+def DownloadFromYoutube():
+    VideoLink = parser.GetYoutube()
+    if VideoLink is None:
+        print("No video link provided")
+        exit()
+    else:
+        try:
+            video = pytube.YouTube(VideoLink)
+            video_streams = video.streams.filter(type="video")
+            video_streams[1].download("./video", filename="cache.mp4")
+        except:
+            print("Invalid video link")
+            exit()
+
 
 def PlayVideoFrames(file):
     video = cv2.VideoCapture(file)
-    FrameSleep = ((1 / vp.PreviewFramerate(file)) * 0.564)
+    #FrameSleep = ((1 / vp.PreviewFramerate(file)) * 0.564)
     while video.isOpened():
         ret, frame = video.read()
         if ret:
             frame = vp.MapFrameToTerminal(frame)
             frame = vp.MapIntensity(frame)
             print("".join(frame))
-            time.sleep(FrameSleep)
+            #time.sleep(FrameSleep)
             if cv2.waitKey(1) & 0xFF == ord("q"):
                 break
         else:
@@ -66,5 +81,9 @@ if __name__ == "__main__":
 
     if parser.GetPre():
         RenderVideoFrames()
+    elif parser.GetYoutube():
+        DownloadFromYoutube()
+        PlayVideoFrames("./video/cache.mp4")
+        os.system(f"rm -rf ./video/cache.mp4")
     else:
         PlayVideoFrames(file)
